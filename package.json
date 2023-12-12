@@ -1,0 +1,7 @@
+{
+    "urls": [
+        ["st7567.py", "github.com:enchant97/micropython-st7567.py"]
+    ],
+    "deps": [],
+    "version": "0.0.0"
+}
