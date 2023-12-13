@@ -13,7 +13,8 @@ COMMAND__ALL_PIXEL_ON_NORMAL = const(0xa0)
 COMMAND__COM_DIRECTION_NORMAL = const(0xc8)
 COMMAND__READ_MODIFY_WRITE = const(0xe0)
 COMMAND__END = const(0xee)
-
+COMMAND__INVERT_DISPLAY_NORMAL = const(0xa6)
+COMMAND__INVERT_DISPLAY_INVERSE = const(0xa7)
 
 class ST7567_I2C:
     def __init__(self, i2c, address=DEFAULT_I2C_ADDR):
@@ -66,6 +67,12 @@ class ST7567_I2C:
 
         self.write_command(bytes([0xaf]))
         self.write_command(bytes([0x40]))
+
+    def invert(self, invert):
+        if invert:
+            self.write_command(bytes([COMMAND__INVERT_DISPLAY_INVERSE]))
+        else:
+            self.write_command(bytes([COMMAND__INVERT_DISPLAY_NORMAL]))
 
     def write_pixel(self, x, y):
         self.write_command(bytes([0xb0 + y//8]))
